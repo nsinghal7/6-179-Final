@@ -38,6 +38,10 @@ public:
     std::vector<NutrientAndAmount> &die();
     NutrientAndAmount drainStats() const;
     std::vector<NutrientAndAmount> &produce(std::vector<Nutrient> &nutrients);
+
+    friend std::ostream &operator<<(std::ostream &os, const Organism &o) {
+        return os << o.ot;
+    };
 };
 
 #endif
