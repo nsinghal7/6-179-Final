@@ -37,7 +37,7 @@ public:
     bool survivedRound();
     std::vector<NutrientAndAmount> &die();
     NutrientAndAmount drainStats() const;
-    std::vector<NutrientAndAmount> &produce();
+    std::vector<NutrientAndAmount> &produce(std::vector<Nutrient> &nutrients);
 };
 
 #endif
