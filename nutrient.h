@@ -1,3 +1,7 @@
+
+#ifndef NUTRIENT_H
+#define NUTRIENT_H
+
 struct Nutrient {
     std::string name;
     
@@ -14,4 +18,6 @@ struct Nutrient {
     friend bool operator==(const Nutrient &a, const Nutrient &b) {
         return a.name == b.name;
     }
-}
+};
+
+#endif
