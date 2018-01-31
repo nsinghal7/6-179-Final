@@ -12,12 +12,11 @@ class MapSquare {
     std::vector<NutrientAndAmount> nutrients;
     Organism org;
     std::vector<Neighbor> neighbors; // list of pairs of neighboring MapSquares and their requested NutrientAndAmounts
-    int consumed; // amount consumed on current round
 public:
     MapSquare(std::vector<Nutrient> nuts);
 
     // called every round
-    void checkLife(std::vector<std::shared_ptr<OrganismType>> types);
+    void checkLife(std::vector<std::shared_ptr<OrganismType>> &types);
     void consume(); // called before and after drain sequence
 
     // drain sequence
