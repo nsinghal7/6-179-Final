@@ -2,7 +2,8 @@
 #define ORGANISM_H
 
 #include "nutrient.h"
-#include "map.h"
+
+class MapSquare;
 
 class OrganismType {
     std::string name;
