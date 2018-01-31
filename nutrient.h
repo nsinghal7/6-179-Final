@@ -10,4 +10,8 @@ struct Nutrient {
         os << n.name;
         return os;
     }
+
+    friend bool operator==(const Nutrient &a, const Nutrient &b) {
+        return a.name == b.name;
+    }
 }
