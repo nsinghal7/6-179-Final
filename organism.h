@@ -15,7 +15,7 @@ class OrganismType {
     int otherProdAmount;
 public:
     OrganismType(){};
-    double scoreCreationOnSquare(std::vector<NutrientAndAmount> &nutrients);
+    double scoreCreationOnSquare(std::vector<NutrientAndAmount> &nutrients) const;
     friend std::istream &operator>>(std::istream &is, OrganismType &ot);
     friend std::ostream &operator<<(std::ostream &os, const OrganismType &ot);
     friend class Organism;
@@ -31,9 +31,8 @@ public:
     Organism(std::shared_ptr<OrganismType> ot, Nutrient &secondaryReqNutrient): ot(ot), secondaryReqNutrient(secondaryReqNutrient){};
     void consumeForCreation(std::vector<NutrientAndAmount> &nutrients);
     void consume(std::vector<NutrientAndAmount> &nutrients);
-    int produce();
     bool survivedRound();
-    NutrientAndAmount drainStats();
+    NutrientAndAmount drainStats() const;
     std::vector<NutrientAndAmount> &produce();
 };
 
