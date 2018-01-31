@@ -34,7 +34,7 @@ public:
     void consumeForCreation(std::vector<NutrientAndAmount> &nutrients);
     void consumePrimary(std::vector<NutrientAndAmount> &nutrients);
     void consumeSecondary(std::vector<NutrientAndAmount> &nutrients);
-    bool survivedRound();
+    bool survivedRound(std::vector<NutrientAndAmount> &nutrients);
     NutrientAndAmount drainStats() const;
     std::vector<NutrientAndAmount> &produce();
 };
