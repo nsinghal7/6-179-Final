@@ -36,7 +36,7 @@ class Map {
     
 public:
     friend std::istream &operator>>(std::istream &is, Map &m);
-    friend std::ostream &operator<<(std::ostream &os, Map&m);
+    friend std::ostream &operator<<(std::ostream &os, const Map&m);
 
     void runRound();
 };
