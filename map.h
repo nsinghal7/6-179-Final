@@ -12,16 +12,34 @@ class MapSquare {
     std::vector<NutrientAndAmount> nutrients;
     Organism org;
     std::vector<Neighbor> neighbors; // list of pairs of neighboring MapSquares and their requested NutrientAndAmounts
+    int consumed; // amount consumed on current round
 public:
     MapSquare(std::vector<Nutrient> nuts);
+
+    // called every round
+    void checkLife(std::vector<std::shared_ptr<OrganismType>> types);
+    void consume(); // called before and after drain sequence
+
+    // drain sequence
+    void requestDrain();
+    void divideRequests();
+    void drain();
+
+    // finish round
+    void checkDead()
+
     friend class Map;
 };
 
 class Map {
     std::vector<std::vector<MapSquare>> map;
     std::vector<std::shared_ptr<OrganismType>> allTypes;
-    std::vector<Nutrient> allNutrients;
-    // add public methods and constructor
+    
+public:
+    friend std::istream &operator>>(std::istream &is, Map &m);
+    friend std::ostream &operator<<(std::ostream &os, Map&m);
+
+    void runRound();
 };
 
 #endif
