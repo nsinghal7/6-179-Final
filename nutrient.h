@@ -20,4 +20,6 @@ struct Nutrient {
     }
 };
 
+typedef std::pair<Nutrient, int> NutrientAndAmount;
+
 #endif

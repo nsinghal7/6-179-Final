@@ -1,9 +1,8 @@
 #ifndef ORGANISM_H
 #define ORGANISM_H
 
+#include <vector>
 #include "nutrient.h"
-
-class MapSquare;
 
 class OrganismType {
     std::string name;
@@ -16,7 +15,7 @@ class OrganismType {
     int otherProdAmount;
 public:
     OrganismType(){};
-    double scoreCreationOnSquare(MapSquare &square);
+    double scoreCreationOnSquare(std::vector<NutrientAndAmount> nutrients);
     friend std::istream &operator>>(std::istream &is, OrganismType &ot);
     friend std::ostream &operator<<(std::ostream &os, const OrganismType &ot);
     friend Organism;
