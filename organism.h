@@ -25,6 +25,7 @@ class Organism {
     std::shared_ptr<OrganismType> ot;
     Nutrient secondaryReqNutrient;
 public:
+    Organism(); // TODO, must clearly be null
     Organism(std::shared_ptr<OrganismType> ot, Nutrient &secondaryReqNutrient): ot(ot), secondaryReqNutrient(secondaryReqNutrient){};
 };
 
