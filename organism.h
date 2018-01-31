@@ -26,6 +26,7 @@ class Organism {
     Nutrient secondaryReqNutrient;
     bool isNull;
     int consumed; // amount consumed on current round
+    void consume(Nutrient &nutrient, std::vector<NutrientAndAmount> &nutrients);
 public:
     Organism(): isNull(true);
     Organism(std::shared_ptr<OrganismType> ot, Nutrient &secondaryReqNutrient): ot(ot), secondaryReqNutrient(secondaryReqNutrient),
