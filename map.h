@@ -17,7 +17,7 @@ public:
 
     // called every round
     void checkLife(std::vector<std::shared_ptr<OrganismType>> &types);
-    void consume(); // called before and after drain sequence
+    void consumePrimary();
 
     // drain sequence
     void requestDrain();
@@ -25,6 +25,7 @@ public:
     void drain();
 
     // finish round
+    void consumeSecondary();
     void checkDead()
 
     friend class Map;

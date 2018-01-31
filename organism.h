@@ -31,7 +31,8 @@ public:
     Organism(std::shared_ptr<OrganismType> ot, Nutrient &secondaryReqNutrient): ot(ot), secondaryReqNutrient(secondaryReqNutrient),
                                                                                 isNull(false), consumed(0) {};
     void consumeForCreation(std::vector<NutrientAndAmount> &nutrients);
-    void consume(std::vector<NutrientAndAmount> &nutrients);
+    void consumePrimary(std::vector<NutrientAndAmount> &nutrients);
+    void consumeSecondary(std::vector<NutrientAndAmount> &nutrients);
     bool survivedRound();
     NutrientAndAmount drainStats() const;
     std::vector<NutrientAndAmount> &produce();
