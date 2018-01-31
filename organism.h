@@ -18,7 +18,7 @@ public:
     double scoreCreationOnSquare(std::vector<NutrientAndAmount> nutrients);
     friend std::istream &operator>>(std::istream &is, OrganismType &ot);
     friend std::ostream &operator<<(std::ostream &os, const OrganismType &ot);
-    friend Organism;
+    friend class Organism;
 };
 
 class Organism {
