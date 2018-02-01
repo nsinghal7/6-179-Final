@@ -61,7 +61,7 @@ std::vector<NutrientAndAmount> Organism::die() {
     std::vector<NutrientAndAmount> ans(3);
     ans[0] = std::make_pair(this->ot->primaryReqNutrient, this->ot->createAmount / 4);
     ans[1] = std::make_pair(this->secondaryReqNutrient.isNull() ? this->ot->primaryReqNutrient : this->secondaryReqNutrient, this->consumed);
-    ans[2] = std::make_pair(this->ot->primaryProdNutrient, this->ot->createAmount * 3 / 4);
+    ans[2] = std::make_pair(this->ot->primaryProdNutrient, this->ot->createAmount * 3 / 4 + this->ot->createAmount % 4);
     this->isNull = true;
     return ans;
 }
