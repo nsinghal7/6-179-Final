@@ -7,6 +7,10 @@
 struct Nutrient {
     std::string name;
     
+    bool isNull() {
+        return name == "";
+    }
+
     friend std::istream &operator>>(std::istream &is, Nutrient &n) {
         is >> n.name;
         return is;
