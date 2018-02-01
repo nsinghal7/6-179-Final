@@ -21,7 +21,7 @@ void Map::readIn(std::istream &is, std::ostream &os) {
                 for(int dcol = -1; dcol <= 1; dcol ++) {
                     if(drow != 0 || dcol != 0) {
                         // link to all adjacent squares, wrapping around edges of array
-                        std::shared_ptr<MapSquare> neighbor = this->map[(row + drow) % rows][(col + dcol) % cols];
+                        std::shared_ptr<MapSquare> neighbor = this->map[(row + drow + rows) % rows][(col + dcol + cols) % cols];
                         this->map[row][col]->neighbors[neighbor] = std::make_pair(def, 0);
                     }
                 }
