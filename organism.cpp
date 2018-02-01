@@ -10,7 +10,7 @@ double OrganismType::scoreCreationOnSquare(std::map<Nutrient, int> &nutrients) c
 }
 
 std::istream &operator>>(std::istream &is, OrganismType &ot) {
-    std::cout << "Name of organism (1 char): ";
+    std::cout << "Name of organism (recommended 1 char): ";
     is >> ot.name;
     std::cout << "Primary consumption nutrient name: ";
     is >> ot.primaryReqNutrient;
