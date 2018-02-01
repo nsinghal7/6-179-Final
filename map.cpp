@@ -79,7 +79,7 @@ void Map::runRound() {
     // Each square figures out how much each of its neighbors get based on how much they requested
     for(auto row : this->map) {
         for(auto square : row) {
-            square->divideRequests(square);
+            square->divideRequests();
         }
     }
     // Each organism then takes its allotment from each of its neighbors
