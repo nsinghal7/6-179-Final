@@ -44,7 +44,7 @@ void MapSquare::consumePrimary() {
     }
 }
 
-void MapSquare::requestDrain() {
+void MapSquare::requestDrain(std::shared_ptr<MapSquare> self) {
     if(!this->org.isAlive()) { // only drain if has an organism
         return;
     }
@@ -52,7 +52,7 @@ void MapSquare::requestDrain() {
 
     for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
         // for each neighbor, set their stored value for me to this stats value
-        neighbor.first->neighbors[this] = stats;
+        neighbor.first->neighbors[self] = stats;
     }
 }
 
@@ -74,12 +74,12 @@ void MapSquare::divideRequests() {
     }
 }
 
-void MapSquare::drain() {
+void MapSquare::drain(std::shared_ptr<MapSquare> self) {
     if(!this->org.isAlive()) { // only drain if has an organism
         return;
     }
     for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
-        NutrientAndAmount &got = neighbor.first->neighbors[std::shared_ptr(this)];
+        NutrientAndAmount &got = neighbor.first->neighbors[self];
         this->nutrients[got.first] += got.second;
         neighbor.first->nutrients[got.first] -= got.second;
         got.second = 0; // prevent continued drainage if organism dies

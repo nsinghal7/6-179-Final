@@ -20,9 +20,9 @@ public:
     void consumePrimary();
 
     // drain sequence
-    void requestDrain();
-    void divideRequests();
-    void drain();
+    void requestDrain(std::shared_ptr<MapSquare> self);
+    void divideRequests(std::shared_ptr<MapSquare> self);
+    void drain(std::shared_ptr<MapSquare> self);
 
     // finish round
     void consumeSecondary();

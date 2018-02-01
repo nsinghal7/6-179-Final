@@ -73,19 +73,19 @@ void Map::runRound() {
     // Each organism tries to drain primary nutrients from its neighbor. Cannot actually drain yet since others might compete
     for(auto row : this->map) {
         for(auto square : row) {
-            square->requestDrain();
+            square->requestDrain(square);
         }
     }
     // Each square figures out how much each of its neighbors get based on how much they requested
     for(auto row : this->map) {
         for(auto square : row) {
-            square->divideRequests();
+            square->divideRequests(square);
         }
     }
     // Each organism then takes its allotment from each of its neighbors
     for(auto row : this->map) {
         for(auto square : row) {
-            square->drain();
+            square->drain(square);
         }
     }
     // Each organism then consumes the rest of what it needs but didn't get before
