@@ -2,6 +2,7 @@
 #define ORGANISM_H
 
 #include <vector>
+#include <iostream>
 #include "nutrient.h"
 
 class OrganismType {

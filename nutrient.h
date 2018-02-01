@@ -2,6 +2,8 @@
 #ifndef NUTRIENT_H
 #define NUTRIENT_H
 
+#include <iostream>
+
 struct Nutrient {
     std::string name;
     

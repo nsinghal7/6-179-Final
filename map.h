@@ -34,10 +34,12 @@ public:
 class Map {
     std::vector<std::vector<MapSquare>> map;
     std::vector<std::shared_ptr<OrganismType>> allTypes;
+    std::vector<Nutrient> allNutrients;
     
 public:
+    Map(std::vector<Nutrient> &an): allNutrients(an) {};
     friend std::istream &operator>>(std::istream &is, Map &m);
-    friend std::ostream &operator<<(std::ostream &os, const Map&m);
+    friend std::ostream &operator<<(std::ostream &os, const Map &m);
 
     void runRound();
 };
