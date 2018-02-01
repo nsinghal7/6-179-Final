@@ -9,7 +9,7 @@ void Map::readIn(std::istream &is, std::ostream &os) {
     for(int i = 0; i < rows; i++) {
         std::vector<std::shared_ptr<MapSquare>> row;
         for(int j = 0; j < cols; j++) {
-            row.push_back(std::make_shared(this->allNutrients));
+            row.push_back(std::make_shared<MapSquare>(this->allNutrients));
         }
         this->map.push_back(row);
     }
