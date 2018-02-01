@@ -16,6 +16,7 @@ public:
     Map(std::vector<Nutrient> &an, std::vector<std::shared_ptr<OrganismType>> at): allNutrients(an), allTypes(at) {};
     void readIn(std::istream &is, std::ostream &os);
     void readOutSquare(std::ostream &os, int row, int col);
+    void readMapForNutrient(std::ostream &os, Nutrient nut);
     friend std::ostream &operator<<(std::ostream &os, const Map &m);
 
     void runRound();

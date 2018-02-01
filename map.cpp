@@ -42,6 +42,16 @@ void Map::readIn(std::istream &is, std::ostream &os) {
 }
 
 
+void Map::readMapForNutrient(std::ostream &os, Nutrient nut) {
+    for(int row = 0; row < this->map.size(); row++) {
+        for(int col = 0; col < this->map[row].size(); col++) {
+            os << this->map[row][col]->nutrients[nut] << " ";
+        }
+        os << std::endl;
+    }
+}
+
+
 std::ostream &operator<<(std::ostream &os, const Map &m) {
     for(int row = 0; row < m.map.size(); row++) {
         for(int col = 0; col < m.map[row].size(); col++) {

@@ -67,6 +67,11 @@ int main() {
             std::cout << "Enter coordinates of square to get info on as [row] [col]: ";
             std::cin >> row >> col;
             map.readOutSquare(std::cout, row, col);
+        } else if(command == "map") {
+            std::cout << "Enter the name of the nutrient to map: ";
+            Nutrient nut;
+            std::cin >> nut;
+            map.readMapForNutrient(std::cout, nut);
         } else if(command == "skip") {
             int skip;
             std::cin >> skip; // they're impatient, so don't bother with more instructions
@@ -83,6 +88,7 @@ int main() {
             }
             std::cout << "Use 'next' to run the next round and show the map of organisms afterwards" << std::endl
                         << "Use 'info' to get information on the nutrients at a square" << std::endl
+                        << "Use 'map' to get a full map with amounts for a nutrient" << std::endl
                         << "Use 'skip [int k]' to run the next k rounds and only show the map at the end" << std::endl
                         << "Use 'quit' to quit the program" << std::endl;
         }
