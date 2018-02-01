@@ -121,16 +121,24 @@ void MapSquare::produce(std::vector<Nutrient> &allNutrients) {
 }
 
 
-void MapSquare::readIn(std::istream &is, std::ostream &os) {
+void MapSquare::readIn(std::istream &is, std::ostream &os, std::vector<Nutrient> &allNutrients) {
     os << "Number of types of nutrients on square: ";
     int n;
     is >> n;
     os << "Enter all nutrients as [name] [quantity]" << std::endl;
     for(int i = 0; i < n; i++) {
+        bool first = true;
         Nutrient nut;
-        int amount;
-        is >> nut >> amount;
-        this->nutrients[nut] = amount;
+        int amount = -1;
+        while(amount < 0 || std::find(allNutrients.begin(), allNutrients.end(), nut) == allNutrients.end()) {
+            if(first) {
+                first = false;
+            } else {
+                os << "Nutrient not known" << std::endl;
+            }
+            is >> nut >> amount;
+            this->nutrients[nut] = amount;
+        }
     }
 }
 

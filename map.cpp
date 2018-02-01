@@ -37,7 +37,7 @@ void Map::readIn(std::istream &is, std::ostream &os) {
         int row;
         int col;
         is >> row >> col;
-        this->map[row][col]->readIn(is, os);
+        this->map[row][col]->readIn(is, os, this->allNutrients);
     }
 }
 

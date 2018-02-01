@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <algorithm>
 #include "nutrient.h"
 #include "organismType.h"
 #include "organism.h"
@@ -28,7 +29,7 @@ public:
     void consumeSecondary();
     void checkDead();
     void produce(std::vector<Nutrient> &allNutrients);
-    void readIn(std::istream &is, std::ostream &os);
+    void readIn(std::istream &is, std::ostream &os, std::vector<Nutrient> &allNutrients);
     void readOut(std::ostream &os, bool justReadOrg);
 
 
