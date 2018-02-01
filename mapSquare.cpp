@@ -136,7 +136,12 @@ void MapSquare::readIn(std::istream &is, std::ostream &os) {
 
 void MapSquare::readOut(std::ostream &os, bool justReadOrg) {
     if(justReadOrg) {
-        os << this->org << " ";
+        if(this->org.isAlive()) {
+            os << this->org;
+        } else {
+            os << ".";
+        }
+        os << " ";
     } else {
         for(NutrientAndAmount n : this->nutrients) {
             os << n.first << ": " << n.second << std::endl;

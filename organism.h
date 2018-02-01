@@ -29,7 +29,8 @@ public:
     }
 
     friend std::ostream &operator<<(std::ostream &os, const Organism &o) {
-        return os << o.ot;
+        os << *o.ot;
+        return os;
     };
 };
 
