@@ -24,7 +24,7 @@ void MapSquare::checkCreateLife(std::vector<std::shared_ptr<OrganismType>> &type
 
     if(bestScore > 0) {
         // Actually possible to create life
-        Nutrient primary = ot->primary();
+        Nutrient primary = bestType->primary();
         Nutrient secondary;
         int largestAmount = -1;
         for(NutrientAndAmount n : this->nutrients) {
@@ -34,7 +34,7 @@ void MapSquare::checkCreateLife(std::vector<std::shared_ptr<OrganismType>> &type
             }
         }
 
-        this->org.create(ot, secondary);
+        this->org.create(bestType, secondary);
     }
 }
 
