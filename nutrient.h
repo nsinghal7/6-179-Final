@@ -20,6 +20,10 @@ struct Nutrient {
     friend bool operator==(const Nutrient &a, const Nutrient &b) {
         return a.name == b.name;
     }
+
+    friend bool operator<(const Nutrient &a, const Nutrient &b) {
+        return a.name < b.name;
+    }
 };
 
 typedef std::pair<Nutrient, int> NutrientAndAmount;

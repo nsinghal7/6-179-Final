@@ -3,16 +3,17 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 #include "nutrient.h"
 #include "organism.h"
 
 class MapSquare;
-typedef std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> Neighbor;
+typedef std::shared_ptr<MapSquare> Neighbor;
 
 class MapSquare {
-    std::vector<NutrientAndAmount> nutrients;
+    std::map<Nutrient, int> nutrients;
     Organism org;
-    std::vector<Neighbor> neighbors; // list of pairs of neighboring MapSquares and their requested NutrientAndAmounts
+    std::map<Neighbor, NutrientAndAmount> neighbors; // list of pairs of neighboring MapSquares and their requested NutrientAndAmount
 public:
     MapSquare(std::vector<Nutrient> nuts);
 

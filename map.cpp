@@ -1,10 +1,8 @@
 #include "map.h"
 
-MapSquare::MapSquare(std::vector<Nutrient> nuts): nutrients(nuts.size()) {
-    int i = 0;
+MapSquare::MapSquare(std::vector<Nutrient> nuts) {
     for(Nutrient n : nuts) {
-        this->nutrients[i] = make_pair(n, 0)
-        i++;
+        this->nutrients[n] = 0;
     }
 }
 

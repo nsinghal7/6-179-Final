@@ -1,15 +1,9 @@
 #include "organism.h"
 
-double OrganismType::scoreCreationOnSquare(std::vector<NutrientAndAmount> &nutrients) const {
-    int amount = -1;
-    for(NutrientAndAmount &naa : nutrients) {
-        if(naa->first == this->primaryReqNutrient) {
-            amount = naa->second;
-            break;
-        }
-    }
+double OrganismType::scoreCreationOnSquare(std::map<Nutrient, int> &nutrients) const {
+    int amount = nutrients[this->primaryReqNutrient];
     if(amount < this->createAmount) {
-        return 0
+        return 0;
     } else {
         return ((double) amount) / this->createAmount;
     }
@@ -44,39 +38,30 @@ std::ostream &operator<<(std::ostream &os, const OrganismType &ot) {
 
 
 
-void Organism::consumeForCreation(std::vector<NutrientAndAmount> &nutrients) {
-    for(NutrientAndAmount &naa : nutrients) {
-        if(naa->first == this->ot->primaryReqNutrient) {
-            naa->second -= this->ot->createAmount;
-            break;
-        }
-    }
+void Organism::consumeForCreation(std::map<Nutrient, int> &nutrients) {
+    nutrients[this->ot->primaryReqNutrient] -= this->ot->createAmount;
 }
 
-void Organism::consume(Nutrient &nutrient, std::vector<NutrientAndAmount> &nutrients)  {
+void Organism::consume(Nutrient &nutrient, std::map<Nutrient, int> &nutrients)  {
     int needed = this->ot->consumeAmount - this->consumed;
     if(needed == 0) {
         return;
     }
-    for(NutrientAndAmount &naa : nutrients) {
-        if(naa->first == nutrient) {
-            if(naa->second >= needed) {
-                naa->second -= needed;
-                this->consumed += needed;
-                break;
-            } else {
-                this->consumed += naa->second;
-                naa->second = 0;
-            }
-        }
+    int &amount = nutrients[nutrient];
+    if(amount >= needed) {
+        amount -= needed;
+        this->consumed += needed;
+    } else {
+        this->consumed += amount;
+        amount = 0;
     }
 }
 
-void Organism::consumePrimary(std::vector<NutrientAndAmount> &nutrients) {
+void Organism::consumePrimary(std::map<Nutrient, int> &nutrients) {
     this->consume(this->ot->primaryReqNutrient, nutrients);
 }
 
-void Organism::consumeSecondary(std::vector<NutrientAndAmount> &nutrients) {
+void Organism::consumeSecondary(std::map<Nutrient, int> &nutrients) {
     this->consume(this->ot->primaryReqNutrient, nutrients);
     this->consume(this->secondaryReqNutrient, nutrients);
 }
