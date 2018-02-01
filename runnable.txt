@@ -1,0 +1,45 @@
+3
+Soil
+Plant
+Meat
+
+3
+
+P
+Soil
+Plant
+10
+10
+50
+120
+10
+
+A
+Plant
+Meat
+60
+15
+70
+40
+10
+
+D
+Meat
+Soil
+10
+8
+50
+24
+1
+
+7 7
+3
+3 3
+1
+Soil 150
+3 2
+1
+Soil 150
+2 3
+1
+Soil 150
