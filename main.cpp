@@ -5,20 +5,36 @@
 #include "map.h"
 
 int main() {
-    int n;
-    // get all nutrients
-    std::cout << "Number of nutrient types: ";
-    std::cin >> n;
+    int n = 0;
+    bool first = true;
+    while(n <= 0) {
+        if(first) {
+            first = false;
+        } else {
+            std::cout << "Must have some nutrients";
+        }
+        // get all nutrients
+        std::cout << "Number of nutrient types: ";
+        std::cin >> n;
+    }
 
     std::vector<Nutrient> nutrients(n);
     for(int i = 0; i < n; i++) {
         std::cout << "Name of nutrient: ";
         std::cin >> nutrients[i];
     }
-
-    // get all organism types
-    std::cout << "Number of organism types: ";
-    std::cin >> n;
+    n = 0;
+    first = true;
+    while(n <= 0) {
+        if(first) {
+            first = false;
+        } else {
+            std::cout << "Must have some organisms";
+        }
+        // get all organism types
+        std::cout << "Number of organism types: ";
+        std::cin >> n;
+    }
 
     std::vector<std::shared_ptr<OrganismType>> types(n);
     for(int i = 0; i < n; i++) {
