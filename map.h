@@ -16,7 +16,7 @@ public:
     MapSquare(std::vector<Nutrient> nuts);
 
     // called every round
-    void checkLife(std::vector<std::shared_ptr<OrganismType>> &types);
+    void checkCreateLife(std::vector<std::shared_ptr<OrganismType>> &types);
     void consumePrimary();
 
     // drain sequence
@@ -26,7 +26,7 @@ public:
 
     // finish round
     void consumeSecondary();
-    void checkDead()
+    void checkDead();
 
     friend class Map;
 };
