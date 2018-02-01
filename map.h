@@ -7,8 +7,6 @@
 #include "nutrient.h"
 #include "organism.h"
 
-class MapSquare;
-
 class MapSquare {
     std::map<Nutrient, int> nutrients;
     Organism org;
