@@ -1,29 +1,43 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include "nutrient.h"
 #include "organismType.h"
 #include "map.h"
 
+
 int main() {
+    std::cout << "Filename to load data or 'No' to use std::cin: ";
+    std::string f;
+    std::cin >> f;
+    std::ifstream filestream;
+    std::ofstream ignorestream; // will not be opened, just used to ignore output
+    if(f != "No") {
+        filestream.open(f);
+    }
+
+    std::istream &is = (f == "No" ? std::cin : filestream);
+    std::ostream &out = ( f == "No" ? std::cout : ignorestream);
+
     int n = 0;
     bool first = true;
     while(n <= 0) {
         if(first) {
             first = false;
         } else {
-            std::cout << "Must have some nutrients" << std::endl;
-            std::cin.clear();
-            std::cin.ignore(100, '\n');
+            out << "Must have some nutrients" << std::endl;
+            is.clear();
+            is.ignore(100, '\n');
         }
         // get all nutrients
-        std::cout << "Number of nutrient types: ";
-        std::cin >> n;
+        out << "Number of nutrient types: ";
+        is >> n;
     }
 
     std::vector<Nutrient> nutrients(n);
     for(int i = 0; i < n; i++) {
-        std::cout << "Name of nutrient: ";
-        std::cin >> nutrients[i];
+        out << "Name of nutrient: ";
+        is >> nutrients[i];
     }
     n = 0;
     first = true;
@@ -31,24 +45,28 @@ int main() {
         if(first) {
             first = false;
         } else {
-            std::cout << "Must have some organisms" << std::endl;
-            std::cin.clear();
-            std::cin.ignore(100, '\n');
+            out << "Must have some organisms" << std::endl;
+            is.clear();
+            is.ignore(100, '\n');
         }
         // get all organism types
-        std::cout << "Number of organism types: ";
-        std::cin >> n;
+        out << "Number of organism types: ";
+        is >> n;
     }
 
     std::vector<std::shared_ptr<OrganismType>> types(n);
     for(int i = 0; i < n; i++) {
         types[i] = std::make_shared<OrganismType>();
-        types[i]->readIn(std::cin, std::cout, nutrients);
+        types[i]->readIn(is, out, nutrients);
     }
 
     // get the map
     Map map(nutrients, types);
-    map.readIn(std::cin, std::cout);
+    map.readIn(is, out);
+
+    if(f != "No") {
+        filestream.close();
+    }
 
     // run rounds
     int round = 1;
