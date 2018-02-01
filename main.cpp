@@ -20,9 +20,9 @@ int main() {
     std::cout << "Number of organism types: ";
     std::cin >> n;
 
-    std::vector<OrganismType> types(n);
+    std::vector<std::shared_ptr<OrganismType>> types(n);
     for(int i = 0; i < n; i++) {
-        types[i].readIn(std::cin, std::cout);
+        types[i]->readIn(std::cin, std::cout);
     }
 
     // get the map
