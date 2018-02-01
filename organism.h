@@ -17,6 +17,9 @@ class OrganismType {
 public:
     OrganismType(){};
     double scoreCreationOnSquare(std::vector<NutrientAndAmount> &nutrients) const;
+    Nutrient primary() const {
+        return this->primaryReqNutrient;
+    }
     friend std::istream &operator>>(std::istream &is, OrganismType &ot);
     friend std::ostream &operator<<(std::ostream &os, const OrganismType &ot);
     friend class Organism;
@@ -39,6 +42,10 @@ public:
     std::vector<NutrientAndAmount> &die();
     NutrientAndAmount drainStats() const;
     std::vector<NutrientAndAmount> &produce(std::vector<Nutrient> &nutrients);
+
+    bool isAlive() const {
+        return !this->isNull;
+    }
 
     friend std::ostream &operator<<(std::ostream &os, const Organism &o) {
         return os << o.ot;
