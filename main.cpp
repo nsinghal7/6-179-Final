@@ -11,8 +11,9 @@ int main() {
         if(first) {
             first = false;
         } else {
-            std::cout << "Must have some nutrients";
+            std::cout << "Must have some nutrients" << std::endl;
             std::cin.clear();
+            std::cin.ignore(100, '\n');
         }
         // get all nutrients
         std::cout << "Number of nutrient types: ";
@@ -30,8 +31,9 @@ int main() {
         if(first) {
             first = false;
         } else {
-            std::cout << "Must have some organisms";
+            std::cout << "Must have some organisms" << std::endl;
             std::cin.clear();
+            std::cin.ignore(100, '\n');
         }
         // get all organism types
         std::cout << "Number of organism types: ";
