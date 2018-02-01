@@ -12,7 +12,7 @@ class MapSquare;
 class MapSquare {
     std::map<Nutrient, int> nutrients;
     Organism org;
-    std::map<MapSquare *, NutrientAndAmount> neighbors; // must use * not shared_ptr so that `this` works as key.
+    std::map<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbors;
     void addNutrients(std::vector<NutrientAndAmount> &add);
 public:
     MapSquare(std::vector<Nutrient> nuts);
@@ -38,13 +38,13 @@ public:
 };
 
 class Map {
-    std::vector<std::vector<MapSquare>> map;
+    std::vector<std::vector<std::shared_ptr<MapSquare>>> map;
     std::vector<std::shared_ptr<OrganismType>> allTypes;
     std::vector<Nutrient> allNutrients;
     
 public:
-    Map(std::vector<Nutrient> &an): allNutrients(an) {};
-    friend std::istream &operator>>(std::istream &is, Map &m);
+    Map(std::vector<Nutrient> &an, std::vector<std::shared_ptr<OrganismType>> at): allNutrients(an), allTypes(at) {};
+    void readIn(std::istream &is, std::ostream &os);
     friend std::ostream &operator<<(std::ostream &os, const Map &m);
 
     void runRound();

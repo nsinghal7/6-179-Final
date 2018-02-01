@@ -50,7 +50,7 @@ void MapSquare::requestDrain() {
     }
     NutrientAndAmount stats = this->org.drainStats();
 
-    for(std::pair<MapSquare *, NutrientAndAmount> neighbor : this->neighbors) {
+    for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
         // for each neighbor, set their stored value for me to this stats value
         neighbor->first->neighbors[this] = stats;
     }
@@ -60,11 +60,11 @@ void MapSquare::requestDrain() {
 void MapSquare::divideRequests() {
     // all squares divide requests
     std::map<Nutrient, int> totals;
-    for(std::pair<MapSquare *, NutrientAndAmount> neighbor : this->neighbors) {
+    for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
         NutrientAndAmount &naa = neighbor->second;
         totals[naa->first] += naa->second;
     }
-    for(std::pair<MapSquare *, NutrientAndAmount> neighbor : this->neighbors) {
+    for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
         NutrientAndAmount &naa = neighbor->second;
         int total = totals[naa->first];
         int possess = this->nutrients[naa->first];
@@ -78,10 +78,11 @@ void MapSquare::drain() {
     if(!this->org.isAlive()) { // only drain if has an organism
         return;
     }
-    for(std::pair<MapSquare *, NutrientAndAmount> neighbor : this->neighbors) {
-        NutrientAndAmount &got = neighbor->first->neighbors[this];
+    for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
+        NutrientAndAmount &got = neighbor->first->neighbors[std::shared_ptr(this)];
         this->nutrients[got->first] += got->second;
         neighbor->first->nutrients[got->first] -= got->second;
+        got->second = 0; // prevent continued drainage if organism dies
     }
 }
 
@@ -107,6 +108,7 @@ void MapSquare::checkDead() {
 
 
 void MapSquare::produce(std::vector<Nutrient> &allNutrients) {
+    //TODO spread
     if(this->org.isAlive()) { // only produce if alive
         this->addNutrients(this->org.produce(allNutrients));
     }
@@ -144,6 +146,37 @@ void MapSquare::readOut(std::ostream &os, bool readOrg) {
 
 
 
+
+
+void Map::readIn(std::istream &is, std::ostream &os) {
+    os << "Dimensions of map as [rows] [cols]: ";
+    int rows;
+    int cols;
+    is >> rows >> cols;
+    // create map
+    for(int i = 0; i < rows; i++) {
+        std::vector<MapSquare> row;
+        for(int j = 0; j < cols; j++) {
+            row.push_back(new MapSquare(allNutrients));
+        }
+        this->map.push_back(row);
+    }
+    // link adjacent squares to each other
+    Nutrient def = this->allNutrients[0];
+    for(int row = 0; row < rows; row++) {
+        for(int col = 0; col < cols; col++) {
+            for(int drow = -1; drow <= 1; drow ++) {
+                for(int dcol = -1; dcol <= 1; dcol ++) {
+                    if(drow != 0 || dcol != 0) {
+                        this->map[row][col].neighbors[this->map[(row + drow) % rows][(col + dcol) % cols]] = std::make_pair(def, 0);
+                    }
+                }
+            }
+        }
+    }
+    // fill squares with nutrients
+    //TODO
+}
 
 
 
