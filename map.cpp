@@ -49,6 +49,7 @@ std::ostream &operator<<(std::ostream &os, const Map &m) {
         }
         os << std::endl;
     }
+    return os;
 }
 
 
