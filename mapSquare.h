@@ -21,7 +21,7 @@ public:
 
     // drain sequence
     void requestDrain(std::shared_ptr<MapSquare> self);
-    void divideRequests(std::shared_ptr<MapSquare> self);
+    void divideRequests();
     void drain(std::shared_ptr<MapSquare> self);
 
     // finish round
