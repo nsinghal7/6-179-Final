@@ -2,10 +2,10 @@
 
 double OrganismType::scoreCreationOnSquare(std::map<Nutrient, int> &nutrients) const {
     int amount = nutrients[this->primaryReqNutrient];
-    if(amount < this->createAmount) {
+    if(amount < this->createAmount + this->consumeAmount) {
         return 0;
     } else {
-        return ((double) amount) / this->createAmount;
+        return ((double) amount - this->createAmount) / this->consumeAmount;
     }
 }
 
