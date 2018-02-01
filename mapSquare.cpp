@@ -60,12 +60,12 @@ void MapSquare::requestDrain(std::shared_ptr<MapSquare> self) {
 void MapSquare::divideRequests() {
     // all squares divide requests
     std::map<Nutrient, int> totals;
-    for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
-        NutrientAndAmount &naa = neighbor.second;
+    for(auto it = this->neighbors.begin(); it != this->neighbors.end(); it++) {
+        NutrientAndAmount &naa = it->second;
         totals[naa.first] += naa.second;
     }
-    for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
-        NutrientAndAmount &naa = neighbor.second;
+    for(auto it = this->neighbors.begin(); it != this->neighbors.end(); it++) {
+        NutrientAndAmount &naa = it->second;
         int total = totals[naa.first];
         int possess = this->nutrients[naa.first];
         if(total > possess) { // total cannot be 0 since possess >= 0
