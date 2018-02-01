@@ -35,6 +35,7 @@ void MapSquare::checkCreateLife(std::vector<std::shared_ptr<OrganismType>> &type
         }
 
         this->org.create(bestType, secondary);
+        this->org.consumeForCreation(this->nutrients);
     }
 }
 
