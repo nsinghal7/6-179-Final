@@ -93,16 +93,11 @@ void MapSquare::consumeSecondary() {
 }
 
 
-void MapSquare::addNutrients(std::vector<NutrientAndAmount> &add) {
-    for(NutrientAndAmount naa : add) {
-        this->nutrients[naa.first] += naa.second;
-    }
-}
-
-
 void MapSquare::checkDead() {
     if(this->org.isAlive() && !this->org.survivedRound()) {
-        this->addNutrients(this->org.die());
+        for(NutrientAndAmount naa : this->org.die()) {
+            this->nutrients[naa.first] += naa.second;
+        }
     }
 }
 

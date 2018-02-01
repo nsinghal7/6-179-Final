@@ -12,7 +12,6 @@ class MapSquare {
     std::map<Nutrient, int> nutrients;
     Organism org;
     std::map<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbors;
-    void addNutrients(std::vector<NutrientAndAmount> &add);
 public:
     MapSquare(std::vector<Nutrient> nuts);
 
