@@ -7,7 +7,7 @@
 #include "organism.h"
 
 class MapSquare;
-typedef std::pair<MapSquare, NutrientAndAmount> Neighbor;
+typedef std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> Neighbor;
 
 class MapSquare {
     std::vector<NutrientAndAmount> nutrients;
