@@ -28,6 +28,8 @@ public:
     void consumeSecondary();
     void checkDead();
 
+    friend std::istream &operator>>(std::istream &is, MapSquare &m);
+    friend std::ostream &operator<<(std::ostream &os, MapSquare &m);
     friend class Map;
 };
 
