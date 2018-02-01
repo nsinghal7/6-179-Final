@@ -22,7 +22,7 @@ public:
     Nutrient primary() const {
         return this->primaryReqNutrient;
     }
-    friend std::istream &operator>>(std::istream &is, OrganismType &ot);
+    void readIn(std::istream &is, std::ostream &os);
     friend std::ostream &operator<<(std::ostream &os, const OrganismType &ot);
     friend class Organism;
 };

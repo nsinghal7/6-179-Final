@@ -9,23 +9,23 @@ double OrganismType::scoreCreationOnSquare(std::map<Nutrient, int> &nutrients) c
     }
 }
 
-std::istream &operator>>(std::istream &is, OrganismType &ot) {
-    std::cout << "Name of organism (recommended 1 char): ";
-    is >> ot.name;
-    std::cout << "Primary consumption nutrient name: ";
-    is >> ot.primaryReqNutrient;
-    std::cout << "Primary production nutrient name: ";
+void OrganismType::readIn(std::istream &is, std::ostream &os) {
+    os << "Name of organism (recommended 1 char): ";
+    is >> this->name;
+    os << "Primary consumption nutrient name: ";
+    is >> this->primaryReqNutrient;
+    os << "Primary production nutrient name: ";
     is >> ot.primaryProdNutrient;
-    std::cout << "Primary nutrient cost for creation: ";
-    is >> ot.createAmount;
-    std::cout << "Primary nutrient drain amount per square per turn: ";
-    is >> ot.drainAmount;
-    std::cout << "Primary/secondary nutrient consumption amount per turn: ";
-    is >> ot.consumeAmount;
-    std::cout << "Primary nutrient production amount per turn: ";
-    is >> ot.primaryProdAmount;
-    std::cout << "Other nutrient production amount per nutrient per turn: ";
-    is >> ot.otherProdAmount;
+    os << "Primary nutrient cost for creation: ";
+    is >> this->createAmount;
+    os << "Primary nutrient drain amount per square per turn: ";
+    is >> this->drainAmount;
+    os << "Primary/secondary nutrient consumption amount per turn: ";
+    is >> this->consumeAmount;
+    os << "Primary nutrient production amount per turn: ";
+    is >> this->primaryProdAmount;
+    os << "Other nutrient production amount per nutrient per turn: ";
+    is >> this->otherProdAmount;
     return is;
 }
 
