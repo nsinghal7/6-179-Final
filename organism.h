@@ -34,8 +34,7 @@ class Organism {
     void consume(Nutrient &nutrient, std::map<Nutrient, int> &nutrients);
 public:
     Organism(): isNull(true) {};
-    Organism(std::shared_ptr<OrganismType> ot, Nutrient &secondaryReqNutrient): ot(ot), secondaryReqNutrient(secondaryReqNutrient),
-                                                                                isNull(false), consumed(0) {};
+    void create(std::shared_ptr<OrganismType> ot, Nutrient &secondaryReqNutrient);
     void consumeForCreation(std::map<Nutrient, int> &nutrients);
     void consumePrimary(std::map<Nutrient, int> &nutrients);
     void consumeSecondary(std::map<Nutrient, int> &nutrients);

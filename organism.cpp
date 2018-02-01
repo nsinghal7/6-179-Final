@@ -100,5 +100,13 @@ std::vector<NutrientAndAmount> &Organism::die() {
     ans[0] = make_pair(this->ot->primaryReqNutrient, this->ot->createAmount / 4);
     ans[1] = make_pair(this->secondaryReqNutrient, this->consumed);
     ans[2] = make_pair(this->ot->primaryProdNutrient, this->ot->createAmount * 3 / 4);
+    this->isNull = true;
     return ans;
+}
+
+void Organism::create(std::shared_ptr<OrganismType> ot, Nutrient &secondaryReqNutrient) {
+    this->ot = ot;
+    this->secondaryReqNutrient = secondaryReqNutrient;
+    this->isNull = false;
+    this->consumed = 0;
 }
