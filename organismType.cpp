@@ -9,13 +9,29 @@ double OrganismType::scoreCreationOnSquare(std::map<Nutrient, int> &nutrients) c
     }
 }
 
-void OrganismType::readIn(std::istream &is, std::ostream &os) {
+void OrganismType::readIn(std::istream &is, std::ostream &os, std::vector<Nutrient> &allNutrients) {
     os << "Name of organism (recommended 1 char): ";
     is >> this->name;
-    os << "Primary consumption nutrient name: ";
-    is >> this->primaryReqNutrient;
-    os << "Primary production nutrient name: ";
-    is >> this->primaryProdNutrient;
+    bool first = true;
+    while(std::find(allNutrients.begin(), allNutrients.end(), this->primaryReqNutrient) == allNutrients.end()) {
+        if(first) {
+            first = false;
+        } else {
+            os << "Nutrient not known" << std::endl;
+        }
+        os << "Primary consumption nutrient name: ";
+        is >> this->primaryReqNutrient;
+    }
+    first = true;
+    while(std::find(allNutrients.begin(), allNutrients.end(), this->primaryProdNutrient) == allNutrients.end()) {
+        if(first) {
+            first = false;
+        } else {
+            os << "Nutrient not known" << std::endl;
+        }
+        os << "Primary production nutrient name: ";
+        is >> this->primaryProdNutrient;
+    }
     os << "Primary nutrient cost for creation: ";
     is >> this->createAmount;
     os << "Primary nutrient drain amount per square per turn: ";

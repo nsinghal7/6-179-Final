@@ -2,6 +2,8 @@
 #define ORGANISMTYPE_H
 
 #include <map>
+#include <algorithm>
+#include <vector>
 #include <iostream>
 #include "nutrient.h"
 
@@ -22,7 +24,7 @@ public:
     Nutrient primary() const {
         return this->primaryReqNutrient;
     }
-    void readIn(std::istream &is, std::ostream &os);
+    void readIn(std::istream &is, std::ostream &os, std::vector<Nutrient> &allNutrients);
     friend std::ostream &operator<<(std::ostream &os, const OrganismType &ot);
     friend class Organism;
 };

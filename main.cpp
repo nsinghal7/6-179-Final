@@ -23,7 +23,7 @@ int main() {
     std::vector<std::shared_ptr<OrganismType>> types(n);
     for(int i = 0; i < n; i++) {
         types[i] = std::make_shared<OrganismType>();
-        types[i]->readIn(std::cin, std::cout);
+        types[i]->readIn(std::cin, std::cout, nutrients);
     }
 
     // get the map
