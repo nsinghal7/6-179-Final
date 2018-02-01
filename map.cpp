@@ -7,9 +7,9 @@ void Map::readIn(std::istream &is, std::ostream &os) {
     is >> rows >> cols;
     // create map
     for(int i = 0; i < rows; i++) {
-        std::vector<MapSquare> row;
+        std::vector<std::shared_ptr<MapSquare>> row;
         for(int j = 0; j < cols; j++) {
-            row.push_back(make_shared(this->allNutrients));
+            row.push_back(std::make_shared(this->allNutrients));
         }
         this->map.push_back(row);
     }
@@ -43,9 +43,9 @@ void Map::readIn(std::istream &is, std::ostream &os) {
 
 
 std::ostream &operator<<(std::ostream &os, const Map &m) {
-    for(int row = 0; row < this->map.size(); row++) {
-        for(int col = 0; col < this->map[row].size(); col++) {
-            this->map[row][col]->readOut(os, true);
+    for(int row = 0; row < m.map.size(); row++) {
+        for(int col = 0; col < m.map[row].size(); col++) {
+            m.map[row][col]->readOut(os, true);
         }
         os << std::endl;
     }

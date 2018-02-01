@@ -13,7 +13,7 @@ class MapSquare {
     Organism org;
     std::map<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbors;
 public:
-    MapSquare(std::vector<Nutrient> nuts);
+    MapSquare(std::vector<Nutrient> &nuts);
 
     // called every round
     void checkCreateLife(std::vector<std::shared_ptr<OrganismType>> &types);
