@@ -31,7 +31,7 @@ public:
     void checkDead();
     void produce(std::vector<Nutrient> &allNutrients);
     void readIn(std::istream &is, std::ostream &os);
-    void readOut(std::ostream &os, bool readOrg);
+    void readOut(std::ostream &os, bool justReadOrg);
 
 
     friend class Map;
@@ -45,6 +45,7 @@ class Map {
 public:
     Map(std::vector<Nutrient> &an, std::vector<std::shared_ptr<OrganismType>> at): allNutrients(an), allTypes(at) {};
     void readIn(std::istream &is, std::ostream &os);
+    void readOutSquare(std::ostream &os, int row, int col);
     friend std::ostream &operator<<(std::ostream &os, const Map &m);
 
     void runRound();
