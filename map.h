@@ -8,12 +8,12 @@
 #include "organism.h"
 
 class MapSquare;
-typedef std::shared_ptr<MapSquare> Neighbor;
 
 class MapSquare {
     std::map<Nutrient, int> nutrients;
     Organism org;
-    std::map<Neighbor, NutrientAndAmount> neighbors; // list of pairs of neighboring MapSquares and their requested NutrientAndAmount
+    std::map<MapSquare *, NutrientAndAmount> neighbors; // must use * not shared_ptr so that `this` works as key.
+    void addNutrients(std::vector<NutrientAndAmount> &add);
 public:
     MapSquare(std::vector<Nutrient> nuts);
 
@@ -29,9 +29,11 @@ public:
     // finish round
     void consumeSecondary();
     void checkDead();
+    void produce(std::vector<Nutrient> &allNutrients);
+    void readIn(std::istream &is, std::ostream &os);
+    void readOut(std::ostream &os, bool readOrg);
 
-    friend std::istream &operator>>(std::istream &is, MapSquare &m);
-    friend std::ostream &operator<<(std::ostream &os, MapSquare &m);
+
     friend class Map;
 };
 
