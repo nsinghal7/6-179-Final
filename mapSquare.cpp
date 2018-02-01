@@ -78,10 +78,10 @@ void MapSquare::drain(std::shared_ptr<MapSquare> self) {
     if(!this->org.isAlive()) { // only drain if has an organism
         return;
     }
-    for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
-        NutrientAndAmount &got = neighbor.first->neighbors[self];
+    for(auto it = this->neighbors.begin(); it != this->neighbors.end(); it++) {
+        NutrientAndAmount &got = it->first->neighbors[self];
         this->nutrients[got.first] += got.second;
-        neighbor.first->nutrients[got.first] -= got.second;
+        it->first->nutrients[got.first] -= got.second;
         got.second = 0; // prevent continued drainage if organism dies
     }
 }
@@ -109,9 +109,9 @@ void MapSquare::produce(std::vector<Nutrient> &allNutrients) {
     std::vector<NutrientAndAmount> add = this->org.produce(allNutrients);
     int total = this->neighbors.size() + 1;
     // add portion to each neighbor's amounts
-    for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
+    for(auto it = this->neighbors.begin(); it != this->neighbors.end(); it++) {
         for(NutrientAndAmount &naa : add) {
-            neighbor.first->nutrients[naa.first] += naa.second / total;
+            it->first->nutrients[naa.first] += naa.second / total;
         }
     }
     // add portion and leftovers to own amounts. roundoff must be added here so no arbitrary squares are favored
