@@ -30,7 +30,7 @@ void Organism::consumeSecondary(std::map<Nutrient, int> &nutrients) {
 
 bool Organism::survivedRound() {
     if(this->consumed >= this->ot->consumeAmount) {
-        this->consumed = 0
+        this->consumed = 0;
         return true;
     } else {
         return false;
@@ -41,15 +41,15 @@ NutrientAndAmount Organism::drainStats() const {
     return std::make_pair(this->ot->primaryReqNutrient, this->ot->drainAmount);
 }
 
-std::vector<NutrientAndAmount> &Organism::produce(std::vector<Nutrient> &nutrients) {
+std::vector<NutrientAndAmount> Organism::produce(std::vector<Nutrient> &nutrients) {
     int total = nutrients.size();
     std::vector<NutrientAndAmount> ans(total);
-    int i = 0
+    int i = 0;
     for(Nutrient &n : nutrients) {
         if(n == this->ot->primaryProdNutrient) {
-            ans[i] = make_pair(n, this->ot->primaryProdAmount);
+            ans[i] = std::make_pair(n, this->ot->primaryProdAmount);
         } else {
-            ans[i] = make_pair(n, this->ot->otherProdAmount);
+            ans[i] = std::make_pair(n, this->ot->otherProdAmount);
         }
         i++;
     }
@@ -57,11 +57,11 @@ std::vector<NutrientAndAmount> &Organism::produce(std::vector<Nutrient> &nutrien
 }
 
 
-std::vector<NutrientAndAmount> &Organism::die() {
+std::vector<NutrientAndAmount> Organism::die() {
     std::vector<NutrientAndAmount> ans(3);
-    ans[0] = make_pair(this->ot->primaryReqNutrient, this->ot->createAmount / 4);
-    ans[1] = make_pair(this->secondaryReqNutrient, this->consumed);
-    ans[2] = make_pair(this->ot->primaryProdNutrient, this->ot->createAmount * 3 / 4);
+    ans[0] = std::make_pair(this->ot->primaryReqNutrient, this->ot->createAmount / 4);
+    ans[1] = std::make_pair(this->secondaryReqNutrient, this->consumed);
+    ans[2] = std::make_pair(this->ot->primaryProdNutrient, this->ot->createAmount * 3 / 4);
     this->isNull = true;
     return ans;
 }

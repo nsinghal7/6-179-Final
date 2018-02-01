@@ -20,9 +20,9 @@ public:
     void consumePrimary(std::map<Nutrient, int> &nutrients);
     void consumeSecondary(std::map<Nutrient, int> &nutrients);
     bool survivedRound();
-    std::vector<NutrientAndAmount> &die();
+    std::vector<NutrientAndAmount> die();
     NutrientAndAmount drainStats() const;
-    std::vector<NutrientAndAmount> &produce(std::vector<Nutrient> &nutrients);
+    std::vector<NutrientAndAmount> produce(std::vector<Nutrient> &nutrients);
 
     bool isAlive() const {
         return !this->isNull;

@@ -28,9 +28,9 @@ void MapSquare::checkCreateLife(std::vector<std::shared_ptr<OrganismType>> &type
         Nutrient secondary;
         int largestAmount = -1;
         for(NutrientAndAmount n : this->nutrients) {
-            if(n->second > largestAmount && n->first != primary) {
-                secondary = n->first;
-                largestAmount = n->second;
+            if(n.second > largestAmount && n.first != primary) {
+                secondary = n.first;
+                largestAmount = n.second;
             }
         }
 
@@ -52,7 +52,7 @@ void MapSquare::requestDrain() {
 
     for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
         // for each neighbor, set their stored value for me to this stats value
-        neighbor->first->neighbors[this] = stats;
+        neighbor.first->neighbors[this] = stats;
     }
 }
 
@@ -61,15 +61,15 @@ void MapSquare::divideRequests() {
     // all squares divide requests
     std::map<Nutrient, int> totals;
     for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
-        NutrientAndAmount &naa = neighbor->second;
-        totals[naa->first] += naa->second;
+        NutrientAndAmount &naa = neighbor.second;
+        totals[naa.first] += naa.second;
     }
     for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
-        NutrientAndAmount &naa = neighbor->second;
-        int total = totals[naa->first];
-        int possess = this->nutrients[naa->first];
+        NutrientAndAmount &naa = neighbor.second;
+        int total = totals[naa.first];
+        int possess = this->nutrients[naa.first];
         if(total > possess) { // total cannot be 0 since possess >= 0
-            naa->second = possess * naa->second / total; // rounded down proportial amount of possessed amount
+            naa.second = possess * naa.second / total; // rounded down proportial amount of possessed amount
         }
     }
 }
@@ -79,10 +79,10 @@ void MapSquare::drain() {
         return;
     }
     for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
-        NutrientAndAmount &got = neighbor->first->neighbors[std::shared_ptr(this)];
-        this->nutrients[got->first] += got->second;
-        neighbor->first->nutrients[got->first] -= got->second;
-        got->second = 0; // prevent continued drainage if organism dies
+        NutrientAndAmount &got = neighbor.first->neighbors[std::shared_ptr(this)];
+        this->nutrients[got.first] += got.second;
+        neighbor.first->nutrients[got.first] -= got.second;
+        got.second = 0; // prevent continued drainage if organism dies
     }
 }
 
@@ -95,7 +95,7 @@ void MapSquare::consumeSecondary() {
 
 void MapSquare::addNutrients(std::vector<NutrientAndAmount> &add) {
     for(NutrientAndAmount naa : add) {
-        this->nutrients[naa->first] += naa->second;
+        this->nutrients[naa.first] += naa.second;
     }
 }
 
@@ -116,12 +116,12 @@ void MapSquare::produce(std::vector<Nutrient> &allNutrients) {
     // add portion to each neighbor's amounts
     for(std::pair<std::shared_ptr<MapSquare>, NutrientAndAmount> neighbor : this->neighbors) {
         for(NutrientAndAmount &naa : add) {
-            neighbor->first->nutrients[naa->first] += naa->second / total;
+            neighbor.first->nutrients[naa.first] += naa.second / total;
         }
     }
     // add portion and leftovers to own amounts. roundoff must be added here so no arbitrary squares are favored
     for(NutrientAndAmount &naa : add) {
-        this->nutrients[naa->first] += naa->second / total + naa->second % total;
+        this->nutrients[naa.first] += naa.second / total + naa.second % total;
     }
 }
 
@@ -144,7 +144,7 @@ void MapSquare::readOut(std::ostream &os, bool justReadOrg) {
         os << this->org << " ";
     } else {
         for(NutrientAndAmount n : this->nutrients) {
-            os << n->first << ": " << n->second << std::endl;
+            os << n.first << ": " << n.second << std::endl;
         }
     }
 }

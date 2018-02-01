@@ -15,7 +15,7 @@ void OrganismType::readIn(std::istream &is, std::ostream &os) {
     os << "Primary consumption nutrient name: ";
     is >> this->primaryReqNutrient;
     os << "Primary production nutrient name: ";
-    is >> ot.primaryProdNutrient;
+    is >> this->primaryProdNutrient;
     os << "Primary nutrient cost for creation: ";
     is >> this->createAmount;
     os << "Primary nutrient drain amount per square per turn: ";
@@ -26,7 +26,6 @@ void OrganismType::readIn(std::istream &is, std::ostream &os) {
     is >> this->primaryProdAmount;
     os << "Other nutrient production amount per nutrient per turn: ";
     is >> this->otherProdAmount;
-    return is;
 }
 
 std::ostream &operator<<(std::ostream &os, const OrganismType &ot) {
